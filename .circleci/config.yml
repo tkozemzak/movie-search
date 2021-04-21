@@ -1,10 +1,13 @@
 version: 2.1
-
-jobs:
-  build:
+executors:
+  app-executor:
     docker:
       - image: circleci/node:latest
     working_directory: ~/repo
+
+jobs:
+  build:
+    executor: app-executor
     steps:
       - checkout
       - run:
@@ -23,9 +26,7 @@ jobs:
           key: app-{{ checksum "package.json" }}
 
   deploy-to-aws-s3:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/repo
+    executor: app-executor
     steps:
       - checkout
       - run:
@@ -60,9 +61,7 @@ jobs:
             fi
 
   deploy-to-aws-cloudfront:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/repo
+    executor: app-executor
     steps:
       - checkout
       - run:
