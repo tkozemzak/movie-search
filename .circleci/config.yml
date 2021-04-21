@@ -1,7 +1,20 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Show Current Branch
+          command: echo Current Branch is ${CURRENT_BRANCH}
+      - restore_cache:
+          key:
+            - app-{{ checksum "package.json" }}
+            - app-
+      - save_cache:
+          paths:
+            - node_modules
+          key: app-{{ checksum "package.json" }}
