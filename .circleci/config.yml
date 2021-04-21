@@ -11,7 +11,7 @@ jobs:
           name: Show Current Branch
           command: echo Current Branch is ${CURRENT_BRANCH}
       - restore_cache:
-          key:
+          keys:
             - app-{{ checksum "package.json" }}
             - app-
       - run:
