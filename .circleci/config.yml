@@ -5,40 +5,50 @@ executors:
       - image: circleci/node:latest
     working_directory: ~/repo
 
+aliases:
+  - &show-current-branch-name
+    run:
+        name: Show Current Branch
+        command: echo Current Branch is ${CIRCLE_BRANCH}
+  - &restore-cache
+    restore_cache:
+      keys:
+        - app-{{ checksum "package.json" }}
+        - app-
+  - &install-Dependencies
+    run:
+      name: install dependencies
+      command: npm install
+  - &save-cache
+    save_cache:
+      paths:
+        - node_modules
+      key: app-{{ checksum "package.json" }}
+  - &install-aws-cli
+    run:
+      name: Install AWS CLI
+      working_directory: /
+      command: |
+        sudo apt-get -y -qq update
+        sudo apt-get install -y awscli
+        sudo apt-get install -y python-pip python-dev build-essential
+
 jobs:
   build:
     executor: app-executor
     steps:
       - checkout
-      - run:
-          name: Show Current Branch
-          command: echo Current Branch is ${CIRCLE_BRANCH}
-      - restore_cache:
-          keys:
-            - app-{{ checksum "package.json" }}
-            - app-
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: app-{{ checksum "package.json" }}
+      - *show-current-branch-name
+      - *restore-cache
+      - *install-dependencies
+      - *save-cache
 
   deploy-to-aws-s3:
     executor: app-executor
     steps:
       - checkout
-      - run:
-          name: Show Current Branch
-          command: echo Current Branch is ${CIRCLE_BRANCH}
-      - run:
-          name: Installing AWS CLI
-          working_directory: /
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get install -y awscli
-            sudo apt-get install -y python-pip python-dev build-essential
+      - *show-current-branch-name
+      - *install-aws-cli
       - run:
           name: Build Project
           command: |
@@ -64,16 +74,8 @@ jobs:
     executor: app-executor
     steps:
       - checkout
-      - run:
-          name: Show Current Branch
-          command: echo Current Branch is ${CIRCLE_BRANCH}
-      - run:
-          name: Installing AWS CLI
-          working_directory: /
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get install -y awscli
-            sudo apt-get install -y python-pip python-dev build-essential
+      - *show-current-branch-name
+      - *install-aws-cli
       - run:
           name: Build Project
           command: |
