@@ -8,14 +8,14 @@ executors:
 aliases:
   - &show-current-branch-name
     run:
-        name: Show Current Branch
-        command: echo Current Branch is ${CIRCLE_BRANCH}
+      name: Show Current Branch
+      command: echo Current Branch is ${CIRCLE_BRANCH}
   - &restore-cache
     restore_cache:
       keys:
         - app-{{ checksum "package.json" }}
         - app-
-  - &install-Dependencies
+  - &install-dependencies
     run:
       name: install dependencies
       command: npm install
@@ -32,7 +32,15 @@ aliases:
         sudo apt-get -y -qq update
         sudo apt-get install -y awscli
         sudo apt-get install -y python-pip python-dev build-essential
-
+  - &build-project
+    run:
+      name: Build Project
+      command: |
+        npm install
+        npm run build
+        cd build
+        zip ../build.zip -r * .[^.]*
+        echo "Build Successful"
 jobs:
   build:
     executor: app-executor
@@ -49,14 +57,7 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *install-aws-cli
-      - run:
-          name: Build Project
-          command: |
-            npm install
-            npm run build
-            cd build
-            zip ../build.zip -r * .[^.]*
-            echo "Build Successful"
+      - *build-project
       - run:
           name: Deploy to AWS S3
           command: |
@@ -76,14 +77,7 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *install-aws-cli
-      - run:
-          name: Build Project
-          command: |
-            npm install
-            npm run build
-            cd build
-            zip ../build.zip -r * .[^.]*
-            echo "Build Successful"
+      - *build-project
       - run:
           name: Deploy to AWS Cloudfront
           command: |
