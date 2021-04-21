@@ -107,14 +107,14 @@ workflows:
     jobs:
       - build
       - prettier:
-        requires:
-          - build
-        filters:
-          branches:
-            only:
-              - dev
-              - staging
-              - master
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - dev
+                - staging
+                - master
 
       - deploy-to-aws-s3:
           requires:
