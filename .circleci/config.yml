@@ -1,9 +1,15 @@
+orbs:
+  slack: circleci/slack@4.4.0
 version: 2.1
 executors:
   app-executor:
     docker:
       - image: circleci/node:latest
     working_directory: ~/repo
+  slack-executor:
+    docker:
+      - image: 'cibuilds/base:latest'
+    resource_class: small
 
 aliases:
   - &show-current-branch-name
@@ -101,6 +107,52 @@ jobs:
             else
               aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\*
             fi
+
+  notify-via-slack:
+    executor: slack-executor
+    steps:
+      - run: echo "Sending Slack Notification"
+      - slack/notify:
+          event: 'always'
+          channel: 'circleci-movie-search'
+          template: ''
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${CIRCLE_BRANCH} branch deployment to AWS is complete"
+                  }
+                },
+                {
+                  "type": "section",
+                  fields: [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*:\n$CIRCLE_PROJECT_REPONAME"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\n$CIRCLE_BRANCH"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*When*:\n$(date + '%m/%d/%Y %T')"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build*:\n$CIRCLE_BUILD_NUM"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Author*:\n$CIRCLE_PROJECT_USERNAME"
+                    },
+                  ]
+                },
+              ]
+            }
 
 workflows:
   build_and_deploy:

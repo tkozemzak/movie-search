@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 
-function App() {
+const App = () => {
   const [count, setCount] = useState(0);
   return (
     <div className="App">
@@ -11,6 +11,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
