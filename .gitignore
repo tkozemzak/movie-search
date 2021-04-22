@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-
+infrastructure/.env
 # testing
 /coverage
 
@@ -29,6 +29,8 @@ yarn-error.log*
 ### Terraform ###
 # Local .terraform directories
 infrastructure/.terraform/*
+infrastructure/.terraform
+infrastructure/.terraform.lock.hcl
 
 # .tfstate files
 infrastructure/*.tfstate

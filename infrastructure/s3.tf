@@ -3,11 +3,11 @@
 ################
 
 resource "aws_s3_bucket" "movie_search_s3_bucket" {
-    bucket = "${local.prefix}-app"
-    acl = "public-read"
-    force_destroy = true
+  bucket        = "${local.prefix}-app"
+  acl           = "public-read"
+  force_destroy = true
 
-    policy = <<EOF
+  policy = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -24,14 +24,14 @@ resource "aws_s3_bucket" "movie_search_s3_bucket" {
 }
     EOF
 
-    website {
-        index_document = "index.html"
-        error_document = "error.html"
-    }
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
 
-    versioning {
-        enabled = true
-    }
+  versioning {
+    enabled = true
+  }
 
-    tags = local.common_tags
+  tags = local.common_tags
 }
