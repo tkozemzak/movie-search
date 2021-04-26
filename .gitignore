@@ -31,7 +31,6 @@ yarn-error.log*
 infrastructure/.terraform/*
 infrastructure/.terraform
 infrastructure/.terraform.lock.hcl
-
 # .tfstate files
 infrastructure/*.tfstate
 infrastructure/*.tfstate.*
