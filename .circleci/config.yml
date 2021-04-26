@@ -105,6 +105,10 @@ jobs:
             terraform apply --auto-approve
             terraform output movie_search_bucket_name > ../movie_search_bucket_name.txt
             terraform output cloudfront_distribution_id > ../cloudfront_distribution_id.txt
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - artifacts
 
   deploy-to-aws-s3:
     executor: app-executor
