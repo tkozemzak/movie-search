@@ -14,7 +14,7 @@ const Slideshow = () => {
     }
   ];
   const [state, setState] = useState({
-    slideshow: images[0],
+    slideShow: images[0],
     slideIndex: 0
   });
 
@@ -30,7 +30,14 @@ const Slideshow = () => {
       if (currentIndex <= 0) {
         index = images.length - 1;
       } else {
-        index -= 1;
+        index--;
+      }
+    } else {
+      if (currentIndex < images.length) {
+        index++;
+      }
+      if (index === images.length) {
+        index = 0;
       }
     }
     setCurrentIndex(index);
