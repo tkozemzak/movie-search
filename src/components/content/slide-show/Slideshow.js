@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import './Slideshow.scss';
 
 const Slideshow = () => {
-  const images = [1, 2, 3, 4, 5];
+  const images = [
+    {
+      url: 'https://wallpapercave.com/wp/hPLjH8C.jpg'
+    },
+    {
+      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg'
+    },
+    {
+      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg'
+    }
+  ];
   const [state, setState] = useState({
     slideshow: images[0],
     slideIndex: 0
@@ -12,15 +22,15 @@ const Slideshow = () => {
 
   const { slideShow, slideIndex } = state;
 
-  //   const currentSlideIndex = 0;
+  let currentSlideIndex = 0;
 
   const moveSlideWithArrows = (type) => {
-    let index = currentSlideIndex;
+    let index = currentIndex;
     if (type === 'prev') {
       if (currentIndex <= 0) {
         index = images.length - 1;
       } else {
-        index--;
+        index -= 1;
       }
     }
     setCurrentIndex(index);
@@ -53,14 +63,16 @@ const Slideshow = () => {
     <>
       <div className="slider">
         <div className="slider-slides">
-          <div
-            className="slider-image"
-            style={{
-              backgroundImage: `url(https://wallpapercave.com/wp/hPLjH8C.jpg)`
-            }}
-          ></div>
+          {images && images.length && slideShow && (
+            <div
+              className="slider-image"
+              style={{
+                backgroundImage: `url(${slideShow.url})`
+              }}
+            ></div>
+          )}
         </div>
-        <Indicators currentSlide={0} />
+        <Indicators currentSlide={slideIndex} />
         <RenderArrows />
       </div>
     </>
