@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Slideshow.scss';
 
-const Slideshow = () => {
-  const images = [
-    {
-      url: 'https://wallpapercave.com/wp/hPLjH8C.jpg'
-    },
-    {
-      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg'
-    },
-    {
-      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg'
-    }
-  ];
+const Slideshow = ({ images, auto }) => {
+ 
   const [state, setState] = useState({
     slideShow: images[0],
     slideIndex: 0
@@ -26,16 +16,20 @@ const Slideshow = () => {
   let currentSlideIndex = 0;
 
   useEffect(() => {
-    const timeInterval = setInterval(() => {
-      autoMoveSlide();
-    }, 7000);
+if(auto) {
+  const timeInterval = setInterval(() => {
+    autoMoveSlide();
+  }, 7000);
 
-    setSliderInterval(timeInterval);
+  setSliderInterval(timeInterval);
 
-    return () => {
-      clearInterval(timeInterval);
-      clearInterval(sliderInterval);
-    };
+  return () => {
+    clearInterval(timeInterval);
+    clearInterval(sliderInterval);
+  };
+}
+
+    
   }, []);
 
   const autoMoveSlide = () => {
