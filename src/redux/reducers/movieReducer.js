@@ -2,9 +2,11 @@ const initialState = {
   list: []
 };
 
-export default (state = initialState, action) => {
+const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
+
+export default movieReducer

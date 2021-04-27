@@ -69,16 +69,6 @@ jobs:
           paths:
             - artifacts
 
-  prettier:
-    executor: app-executor
-    steps:
-      - checkout
-      - *show-current-branch-name
-      - *restore-cache
-      - run:
-          name: Run prettier check
-          command: npm run prettier:check
-
   terraform-validate:
     executor: terraform-executor
     steps:
@@ -244,18 +234,9 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - prettier:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - dev
-                - staging
-                - master
       - terraform-validate:
           requires:
-            - prettier
+            - build
           filters:
             branches:
               only:
