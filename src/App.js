@@ -1,11 +1,17 @@
-import "./App.css";
+import './App.scss';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import Header from './components/header/Header';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">Hello</header>
-    </div>
+    <Provider store={store}>
+      <div className="app">
+        <Header />
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
