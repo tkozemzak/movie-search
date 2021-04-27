@@ -19,18 +19,34 @@ const Slideshow = () => {
   });
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [sliderTimeout, setSliderTimeout] = useState(0);
+  const [sliderInterval, setSliderInterval] = useState(0);
 
   const { slideShow, slideIndex } = state;
 
   let currentSlideIndex = 0;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      autoMoveSlide();
+    }, 7000);
+
+    setSliderInterval(timeInterval);
+
+    return () => {
+      clearInterval(timeInterval);
+      clearInterval(sliderInterval);
+    };
+  }, []);
 
   const autoMoveSlide = () => {
     let lastIndex = 0;
-    lastIndex = currentSlideIndex++;
+    lastIndex = currentSlideIndex + 1;
     currentSlideIndex = lastIndex >= images.length ? 0 : lastIndex;
+    setState((prev) => ({
+      ...prev,
+      slideIndex: currentSlideIndex,
+      slideShow: images[currentSlideIndex]
+    }));
   };
 
   const moveSlideWithArrows = (type) => {
