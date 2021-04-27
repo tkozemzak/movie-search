@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Slideshow.scss';
 
 const Slideshow = () => {
@@ -19,10 +19,19 @@ const Slideshow = () => {
   });
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [sliderTimeout, setSliderTimeout] = useState(0);
 
   const { slideShow, slideIndex } = state;
 
   let currentSlideIndex = 0;
+
+  useEffect(() => {}, []);
+
+  const autoMoveSlide = () => {
+    let lastIndex = 0;
+    lastIndex = currentSlideIndex++;
+    currentSlideIndex = lastIndex >= images.length ? 0 : lastIndex;
+  };
 
   const moveSlideWithArrows = (type) => {
     let index = currentIndex;
