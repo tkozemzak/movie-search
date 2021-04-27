@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './Slideshow.scss';
 
 const Slideshow = ({ images, auto, showArrows }) => {
@@ -29,7 +30,7 @@ if(auto) {
   };
 }
 
-    
+    // eslint-disable-next-line
   }, []);
 
   const autoMoveSlide = () => {
@@ -104,5 +105,12 @@ if(auto) {
     </>
   );
 };
+
+Slideshow.propTypes = {
+  images: PropTypes.array.isRequired,
+  auto: PropTypes.bool.isRequired,
+  showArrows: PropTypes.bool.isRequired,
+  currentSlide: PropTypes.number
+}
 
 export default Slideshow;
