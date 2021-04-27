@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Slideshow.scss';
 
-const Slideshow = ({ images, auto }) => {
+const Slideshow = ({ images, auto, showArrows }) => {
  
   const [state, setState] = useState({
     slideShow: images[0],
@@ -99,7 +99,7 @@ if(auto) {
           )}
         </div>
         <Indicators currentSlide={slideIndex} />
-        <RenderArrows />
+        {showArrows ? <RenderArrows/> : null}
       </div>
     </>
   );
