@@ -1,16 +1,13 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const App = () => {
-  const [count, setCount] = useState(0);
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Movie Search</h1>
-        <button onClick={() => setCount(count + 1)}>Add</button>
-        <p>{count}</p>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="app">Redux</div>
+    </Provider>
   );
 };
 
