@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../logo.png';
+import logo from '../../assets/cinema-logo.svg';
 import './Header.scss';
 
 const HEADER_LIST = [
