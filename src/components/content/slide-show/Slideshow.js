@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './Slideshow.scss';
 
 const Slideshow = ({ images, auto, showArrows }) => {
- 
   const [state, setState] = useState({
     slideShow: images[0],
     slideIndex: 0
@@ -17,18 +16,18 @@ const Slideshow = ({ images, auto, showArrows }) => {
   let currentSlideIndex = 0;
 
   useEffect(() => {
-if(auto) {
-  const timeInterval = setInterval(() => {
-    autoMoveSlide();
-  }, 7000);
+    if (auto) {
+      const timeInterval = setInterval(() => {
+        autoMoveSlide();
+      }, 7000);
 
-  setSliderInterval(timeInterval);
+      setSliderInterval(timeInterval);
 
-  return () => {
-    clearInterval(timeInterval);
-    clearInterval(sliderInterval);
-  };
-}
+      return () => {
+        clearInterval(timeInterval);
+        clearInterval(sliderInterval);
+      };
+    }
 
     // eslint-disable-next-line
   }, []);
@@ -100,7 +99,7 @@ if(auto) {
           )}
         </div>
         <Indicators currentSlide={slideIndex} />
-        {showArrows ? <RenderArrows/> : null}
+        {showArrows ? <RenderArrows /> : null}
       </div>
     </>
   );
@@ -111,6 +110,6 @@ Slideshow.propTypes = {
   auto: PropTypes.bool.isRequired,
   showArrows: PropTypes.bool.isRequired,
   currentSlide: PropTypes.number
-}
+};
 
 export default Slideshow;

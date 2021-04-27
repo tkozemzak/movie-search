@@ -2,10 +2,7 @@ import React from 'react';
 import Slideshow from '../slide-show/Slideshow';
 import './MainContent.scss';
 
-
-
 const MainContent = () => {
-
   const images = [
     {
       url: 'https://wallpapercave.com/wp/hPLjH8C.jpg'
@@ -20,7 +17,7 @@ const MainContent = () => {
 
   return (
     <div className="main-content">
-      <Slideshow images={images} auto={false} showArrows={true}/>
+      <Slideshow images={images} auto={false} showArrows={true} />
       <div className="grid-movie-title">
         <div className="movieType">Now Playing</div>
         <div className="paginate">Paginate</div>
