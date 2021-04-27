@@ -11,9 +11,21 @@ const HEADER_LIST = [
   },
   {
     id: 2,
-    iconClass: 'fas fa-film',
-    name: 'Now Playing',
-    type: 'now_playing'
+    iconClass: 'fas fa-fire',
+    name: 'Popular',
+    type: 'popular'
+  },
+  {
+    id: 3,
+    iconClass: 'fas fa-star',
+    name: 'Top Rated',
+    type: 'top_rated'
+  },
+  {
+    id: 4,
+    iconClass: 'fas fa-plus-square',
+    name: 'Upcoming',
+    type: 'upcoming'
   }
 ];
 
@@ -51,8 +63,17 @@ const Header = () => {
             <span className="bar"></span>
           </div>
           <ul className={`${navClass ? 'header-nav header-mobile-nav' : 'header-nav'}`}>
-            <li className="header-nav-item">Now Playing</li>
-            <li className="header-nav-item">New Movies</li>
+            {HEADER_LIST.map((data) => {
+              return (
+                <li key={data.id} className="header-nav-item">
+                  <span className="header-list-name">
+                    <i className={data.iconClass} />
+                  </span>
+                  &nbsp;
+                  <span className="header-list-name">{data.name}</span>
+                </li>
+              );
+            })}
             <input className="search-input" type="text" placeholder="Search for a movie" />
           </ul>
         </div>
