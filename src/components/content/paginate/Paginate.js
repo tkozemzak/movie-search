@@ -5,6 +5,21 @@ const Paginate = ({ currentPage, totalPages, paginate }) => {
   const [page, setPage] = useState();
   const [totalPageNumber, setTotalPageNumber] = useState();
 
+  const checkCurrentPagePrev = (page) => {
+    if (page <= 1) {
+      return 'paginate-button disable';
+    } else {
+      return 'paginate-button';
+    }
+  };
+  const checkCurrentPageNext = (page, totalPageNumber) => {
+    if (page >= totalPageNumber) {
+      return 'paginate-button disable';
+    } else {
+      return 'paginate-button';
+    }
+  };
+
   useEffect(() => {
     setPage(currentPage);
     setTotalPageNumber(totalPages);
@@ -15,10 +30,10 @@ const Paginate = ({ currentPage, totalPages, paginate }) => {
       <span className="pageCount">
         {page}/{totalPageNumber}
       </span>
-      <button className="paginate-button disable" onClick={() => paginate('prev')}>
+      <button className={checkCurrentPagePrev(page)} onClick={() => paginate('prev')}>
         Prev
       </button>
-      <button className="paginate-button" onClick={() => paginate('next')}>
+      <button className={checkCurrentPageNext(page, totalPageNumber)} onClick={() => paginate('next')}>
         Next
       </button>
     </>
