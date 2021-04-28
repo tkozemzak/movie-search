@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './Paginate.scss';
 
 const Paginate = ({ currentPage, totalPages, paginate }) => {
@@ -28,7 +29,7 @@ const Paginate = ({ currentPage, totalPages, paginate }) => {
   return (
     <>
       <span className="pageCount">
-        {page}/{totalPageNumber}
+        Page {page} of {totalPageNumber}
       </span>
       <button className={checkCurrentPagePrev(page)} onClick={() => paginate('prev')}>
         Prev
@@ -38,6 +39,12 @@ const Paginate = ({ currentPage, totalPages, paginate }) => {
       </button>
     </>
   );
+};
+
+Paginate.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  paginate: PropTypes.func.isRequired
 };
 
 export default Paginate;
