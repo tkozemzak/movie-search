@@ -6,7 +6,13 @@ import Paginate from '../paginate/Paginate';
 const MainContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const paginate = (type) => {};
+  const paginate = (type) => {
+    if (type === 'prev' && currentPage >= 1) {
+      setCurrentPage((prev) => prev - 1);
+    } else {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
 
   const images = [
     {
