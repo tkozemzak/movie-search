@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../assets/cinema-logo.svg';
+import { MOVIE_API_URL } from '../../services/movies.service';
 import './Header.scss';
 
 const HEADER_LIST = [
@@ -32,6 +33,8 @@ const HEADER_LIST = [
 const Header = () => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+
+  useEffect(() => {}, []);
 
   const toggleMenu = () => {
     menuClass = !menuClass;

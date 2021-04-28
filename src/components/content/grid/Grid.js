@@ -11,7 +11,7 @@ const Grid = ({ images }) => {
             <div key={i}>
               <div className="grid-cell" style={{ backgroundImage: `url(${image.url})` }}>
                 <div className="grid-read-more">
-                  <button className="grid-cell-button">Read More</button>
+                  <button className="grid-cell-button">More Info</button>
                 </div>
                 <div className="grid-detail">
                   <span className="grid-detail-title">Title</span>
