@@ -18,15 +18,15 @@ const MainContent = () => {
   const images = [
     {
       url: 'https://wallpapercave.com/wp/4KOmgLX.jpg',
-      rating: 4.5
+      rating: 7.5
     },
     {
       url: 'https://wallpapercave.com/wp/hPLjH8C.jpg',
-      rating: 3.7
+      rating: 6.7
     },
     {
       url: 'https://wallpapercave.com/wp/4KOmgLX.jpg',
-      rating: 3.2
+      rating: 9.2
     },
     {
       url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg',
@@ -34,7 +34,7 @@ const MainContent = () => {
     },
     {
       url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg',
-      rating: 1.9
+      rating: 8.9
     }
   ];
 
