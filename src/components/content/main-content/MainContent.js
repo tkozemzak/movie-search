@@ -17,10 +17,16 @@ const MainContent = () => {
 
   const images = [
     {
+      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg'
+    },
+    {
       url: 'https://wallpapercave.com/wp/hPLjH8C.jpg'
     },
     {
       url: 'https://wallpapercave.com/wp/4KOmgLX.jpg'
+    },
+    {
+      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg'
     },
     {
       url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg'
@@ -36,7 +42,7 @@ const MainContent = () => {
           <Paginate currentPage={currentPage} totalPages={10} paginate={paginate} />
         </div>
       </div>
-      <Grid />
+      <Grid images={images} />
     </div>
   );
 };

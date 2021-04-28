@@ -1,10 +1,24 @@
 import React from 'react';
 
-const Grid = () => {
+import './Grid.scss';
+
+const Grid = ({ images }) => {
   return (
-    <div>
-      <h1>Grid</h1>
-    </div>
+    <>
+      <div className="grid">
+        {images.map((image, i) => {
+          return (
+            <div key={i}>
+              <div className="grid-cell" style={{ backgroundImage: `url(${image.url})` }}>
+                <div className="grid-read-more">
+                  <button className="grid-cell-button">Read More</button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
