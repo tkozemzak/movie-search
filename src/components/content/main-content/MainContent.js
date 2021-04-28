@@ -17,19 +17,24 @@ const MainContent = () => {
 
   const images = [
     {
-      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg'
+      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg',
+      rating: 4.5
     },
     {
-      url: 'https://wallpapercave.com/wp/hPLjH8C.jpg'
+      url: 'https://wallpapercave.com/wp/hPLjH8C.jpg',
+      rating: 3.5
     },
     {
-      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg'
+      url: 'https://wallpapercave.com/wp/4KOmgLX.jpg',
+      rating: 3.0
     },
     {
-      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg'
+      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg',
+      rating: 5.0
     },
     {
-      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg'
+      url: 'https://i.pinimg.com/originals/bf/ae/3f/bfae3fa83ae7efd6b7b56c3df0fac9bf.jpg',
+      rating: 1.0
     }
   ];
 
