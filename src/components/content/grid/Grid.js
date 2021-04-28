@@ -13,6 +13,13 @@ const Grid = ({ images }) => {
                 <div className="grid-read-more">
                   <button className="grid-cell-button">Read More</button>
                 </div>
+                <div className="grid-detail">
+                  <span className="grid-detail-title">Title</span>
+                  <div className="grid-detail-rating">
+                    Detail Rating Component &nbsp;&nbsp;
+                    <div className="grid-vote-average">Vote Average</div>
+                  </div>
+                </div>
               </div>
             </div>
           );

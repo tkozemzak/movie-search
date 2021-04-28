@@ -55,3 +55,33 @@
     text-decoration: none;
   }
 }
+
+.grid-detail {
+  position: absolute;
+  bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 348px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  .grid-detail-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .grid-detail-rating {
+    padding-top: 4px;
+    display: flex;
+    color: #ffbc0b;
+
+    .grid-vote-average {
+      color: white;
+      margin-top: -3px;
+    }
+  }
+}
