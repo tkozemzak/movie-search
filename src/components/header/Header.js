@@ -38,6 +38,7 @@ const Header = ({ getMovies }) => {
 
   useEffect(() => {
     getMovies('now_playing', 1);
+    // eslint-disable-next-line
   }, []);
 
   const toggleMenu = () => {
