@@ -4,33 +4,7 @@ import logo from '../../assets/cinema-logo.svg';
 import './Header.scss';
 import { getMovies } from '../../redux/actions/movies';
 import { PropTypes } from 'prop-types';
-
-const HEADER_LIST = [
-  {
-    id: 1,
-    iconClass: 'fas fa-film',
-    name: 'Now Playing',
-    type: 'now_playing'
-  },
-  {
-    id: 2,
-    iconClass: 'fas fa-fire',
-    name: 'Popular',
-    type: 'popular'
-  },
-  {
-    id: 3,
-    iconClass: 'fas fa-star',
-    name: 'Top Rated',
-    type: 'top_rated'
-  },
-  {
-    id: 4,
-    iconClass: 'fas fa-plus-square',
-    name: 'Upcoming',
-    type: 'upcoming'
-  }
-];
+import NAV_BUTTON_LIST from '../../assets/nav-button-list';
 
 const Header = ({ getMovies }) => {
   let [navClass, setNavClass] = useState(false);
@@ -41,6 +15,7 @@ const Header = ({ getMovies }) => {
     // eslint-disable-next-line
   }, []);
 
+  //apply css classes according to screen width
   const toggleMenu = () => {
     menuClass = !menuClass;
     setMenuClass(menuClass);
@@ -71,7 +46,7 @@ const Header = ({ getMovies }) => {
             <span className="bar"></span>
           </div>
           <ul className={`${navClass ? 'header-nav header-mobile-nav' : 'header-nav'}`}>
-            {HEADER_LIST.map((data) => {
+            {NAV_BUTTON_LIST.map((data) => {
               return (
                 <li key={data.id} className="header-nav-item">
                   <span className="header-list-name">

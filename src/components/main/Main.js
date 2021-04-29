@@ -5,6 +5,7 @@ import Spinner from '../spinner/Spinner';
 const Main = () => {
   const [loading, setLoading] = useState(false);
 
+  //add 3 second loader until redux store can be populated
   useEffect(() => {
     setLoading(true);
 
