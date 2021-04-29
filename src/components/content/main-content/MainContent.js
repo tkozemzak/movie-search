@@ -44,6 +44,7 @@ const MainContent = ({ list }) => {
 
       setImages(IMAGES);
     }
+    //eslint-disable-next-line
   }, []);
 
   const paginate = (type) => {
@@ -79,7 +80,7 @@ const MainContent = ({ list }) => {
 
   return (
     <div className="main-content">
-      <Slideshow images={images} auto={false} showArrows={true} />
+      <Slideshow images={images} auto={true} showArrows={true} />
       <div className="grid-movie-title">
         <div className="movieType">Now Playing</div>
         <div className="paginate">
