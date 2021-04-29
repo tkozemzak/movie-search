@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import logo from '../../assets/cinema-logo.svg';
-import { MOVIE_API_URL } from '../../services/movies.service';
 import './Header.scss';
+import { getMovies } from '../../redux/actions/movies';
+import { PropTypes } from 'prop-types';
 
 const HEADER_LIST = [
   {
@@ -30,11 +32,13 @@ const HEADER_LIST = [
   }
 ];
 
-const Header = () => {
+const Header = ({ getMovies }) => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getMovies('now_playing', 1);
+  }, []);
 
   const toggleMenu = () => {
     menuClass = !menuClass;
@@ -85,4 +89,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  getMovies: PropTypes.func
+};
+
+const mapStateToProps = (state) => ({
+  list: state.movies.list
+});
+
+export default connect(mapStateToProps, { getMovies })(Header);
