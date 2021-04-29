@@ -18,7 +18,7 @@ const MainContent = ({ list }) => {
       const IMAGES = randomImages.map((item, i) => {
         return {
           id: i,
-          url: `${IMAGE_URL}/${item.backdrop_path}`,
+          url: `${IMAGE_URL}${item.backdrop_path}`,
           title: item.title,
           release_date: item.release_date.slice(0, 4)
         };
