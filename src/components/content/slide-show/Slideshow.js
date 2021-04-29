@@ -101,7 +101,13 @@ const Slideshow = ({ images, auto, showArrows }) => {
               style={{
                 backgroundImage: `url(${slideShow.url})`
               }}
-            ></div>
+            >
+              <div className="slider-title">
+                <h1>{slideShow.title}</h1>
+                <p>-</p>
+                <h5>{slideShow.release_date}</h5>
+              </div>
+            </div>
           )}
         </div>
         <Indicators currentSlide={slideIndex} />
