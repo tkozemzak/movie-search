@@ -14,25 +14,34 @@ const MainContent = ({ list }) => {
   const randomImages = list.sort(() => Math.random() - Math.random()).slice(0, 4);
 
   useEffect(() => {
-    if (randomImages.length) {
-      const IMAGES = [
-        {
-          id: 1,
-          url: `${IMAGE_URL}/${randomImages[0].backdrop_path}`
-        },
-        {
-          id: 2,
-          url: `${IMAGE_URL}/${randomImages[1].backdrop_path}`
-        },
-        {
-          id: 3,
-          url: `${IMAGE_URL}/${randomImages[2].backdrop_path}`
-        },
-        {
-          id: 4,
-          url: `${IMAGE_URL}/${randomImages[3].backdrop_path}`
-        }
-      ];
+    if (list.length && randomImages.length) {
+      const IMAGES = randomImages.map((item, i) => {
+        console.log('item, i', i);
+        return {
+          id: i,
+          url: `${IMAGE_URL}/${item.backdrop_path}`
+        };
+      });
+      // const IMAGES = [
+      //   {
+      //     id: 1,
+      //     url: `${IMAGE_URL}/${randomImages[0].backdrop_path}`
+      //   },
+      //   {
+      //     id: 2,
+      //     url: `${IMAGE_URL}/${randomImages[1].backdrop_path}`
+      //   },
+      //   {
+      //     id: 3,
+      //     url: `${IMAGE_URL}/${randomImages[2].backdrop_path}`
+      //   },
+      //   {
+      //     id: 4,
+      //     url: `${IMAGE_URL}/${randomImages[3].backdrop_path}`
+      //   }
+      // ];
+      console.log('IMAGES: ', IMAGES);
+
       setImages(IMAGES);
     }
   }, []);
