@@ -9,6 +9,8 @@ import { IMAGE_URL } from '../../../services/movies.service';
 const Grid = ({ list }) => {
   const [movieData, setMovieData] = useState([]);
 
+  //set movie data into local state with list from redux store
+  //if list from redux changes, local state will update
   useEffect(() => {
     setMovieData(list);
   }, [list]);

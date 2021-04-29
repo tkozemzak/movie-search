@@ -7,6 +7,7 @@ const Paginate = ({ currentPage, totalPages, paginate }) => {
   const [totalPageNumber, setTotalPageNumber] = useState();
 
   useEffect(() => {
+    //set local state current page and total amount of pages per props passed from MainContent. local state will update as global state updates
     setPage(currentPage);
     setTotalPageNumber(totalPages);
   }, [currentPage, totalPages]);

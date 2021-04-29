@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Slideshow.scss';
 
 const Slideshow = ({ images, auto, showArrows }) => {
+  //set initial state to the first image and the first index in the slideshow indeces
   const [state, setState] = useState({
     slideShow: images[0],
     slideIndex: 0
@@ -21,7 +22,7 @@ const Slideshow = ({ images, auto, showArrows }) => {
       slideIndex: 0,
       slideShow: images[0]
     });
-
+    //scroll through photos on 5 sec interval if user sets autoscroll
     if (auto) {
       const timeInterval = setInterval(() => {
         autoMoveSlide();
@@ -38,6 +39,7 @@ const Slideshow = ({ images, auto, showArrows }) => {
     // eslint-disable-next-line
   }, [images]);
 
+  //scroll through photos on 5 sec interval if user sets autoscroll
   const autoMoveSlide = () => {
     let lastIndex = 0;
     lastIndex = currentSlideIndex + 1;
@@ -49,6 +51,7 @@ const Slideshow = ({ images, auto, showArrows }) => {
     }));
   };
 
+  //wraparound index if arrows are used to scroll through slideshow
   const moveSlideWithArrows = (type) => {
     let index = currentIndex;
     if (type === 'prev') {
