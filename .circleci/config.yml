@@ -47,8 +47,10 @@ aliases:
     run:
       name: Build Project
       command: |
+        apt-get install nodejs-legacy
+        npm install -g npm@latest
         npm update
-        npm install
+        npm install --no-package-lock --force
         nodejs node_modules/node-sass/scripts/install.js
         npm rebuild node-sass
         npm run build
