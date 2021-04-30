@@ -14,11 +14,24 @@
   text-align: center;
 }
 
+@media screen and (max-width: 722px) {
+  .slider-title {
+    margin: auto !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 20%;
+    overflow: inherit;
+  }
+}
+
 .slider-title {
   position: absolute;
   top: 62%;
   left: 2%;
-  width: 20%;
+  width: 350px;
   background-color: rgba(24, 18, 18, 0.6);
   border-radius: 15px;
   padding: 25px 10px 20px 10px;
