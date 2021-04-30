@@ -4,6 +4,7 @@ import Spinner from '../spinner/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadMoreMovies, setResponsePageNumber } from '../../redux/actions/movies';
+import './Main.scss';
 
 const Main = ({ loadMoreMovies, page, totalPages, setResponsePageNumber }) => {
   const [loading, setLoading] = useState(false);
@@ -22,10 +23,11 @@ const Main = ({ loadMoreMovies, page, totalPages, setResponsePageNumber }) => {
   }, []);
 
   const fetchData = () => {
+    let pageNumber = currentPage;
     if (page < totalPages) {
-      setCurrentPage((prev) => {
-        return prev + 1;
-      });
+      pageNumber += 1;
+      setCurrentPage(pageNumber);
+      loadMoreMovies(pageNumber);
     }
   };
 
@@ -33,18 +35,18 @@ const Main = ({ loadMoreMovies, page, totalPages, setResponsePageNumber }) => {
   useEffect(() => {
     setResponsePageNumber(currentPage, totalPages);
     loadMoreMovies('now_playing', currentPage);
-  }, [currentPage]);
+  }, [currentPage, totalPages]);
 
   const handleScroll = () => {
-    const { height } = mainRef.current.getBoundingClientRect();
-    const { top: bottomLineTop } = mainRef.current.getBoundingClientRect();
-    if (bottomLineTop <= height) {
+    const containerHeight = mainRef.current.getBoundingClientRect().height;
+    const { top: bottomLineTop } = bottomLineRef.current.getBoundingClientRect();
+    if (bottomLineTop - 1 <= containerHeight) {
       fetchData();
     }
   };
 
   return (
-    <div className="main" ref={mainRef} onScroll={() => handleScroll()}>
+    <div className="main" ref={mainRef} onScroll={handleScroll}>
       {loading ? <Spinner /> : <MainContent />}
       <div ref={bottomLineRef}></div>
     </div>

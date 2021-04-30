@@ -22,7 +22,9 @@ const movieReducer = (state = initialState, action) => {
     case LOAD_MORE_RESULTS:
       return {
         ...state,
-        list: [...state.list, ...action.payload]
+        list: [...state.list, ...action.payload.list],
+        page: action.payload.page,
+        totalPages: action.payload.totalPages
       };
 
     default:
