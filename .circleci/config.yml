@@ -47,7 +47,10 @@ aliases:
     run:
       name: Build Project
       command: |
+        npm update
         npm install
+        nodejs node_modules/node-sass/scripts/install.js
+        npm rebuild node-sass
         npm run build
         cd build
         zip ../build.zip -r * .[^.]*
