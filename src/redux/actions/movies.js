@@ -27,6 +27,11 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
   }
 };
 
+export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
+  const payload = { page, totalPages };
+  dispatchMethod(RESPONSE_PAGE, payload, dispatch);
+};
+
 const getMovieRequest = async (type, pageNumber) => {
   const movies = await MOVIE_API_URL(type, pageNumber);
   const { results, page, total_pages } = movies.data;
