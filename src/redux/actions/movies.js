@@ -1,4 +1,4 @@
-import { MOVIE_LIST, SET_ERROR, RESPONSE_PAGE, LOAD_MORE_RESULTS } from '../types';
+import { MOVIE_LIST, MOVIE_TYPE, SET_ERROR, RESPONSE_PAGE, LOAD_MORE_RESULTS } from '../types';
 import { MOVIE_API_URL } from '../../services/movies.service';
 
 export const getMovies = (type, pageNumber) => async (dispatch) => {
@@ -30,6 +30,10 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
 export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
   const payload = { page, totalPages };
   dispatchMethod(RESPONSE_PAGE, payload, dispatch);
+};
+
+export const setMovieType = (type) => async (dispatch) => {
+  dispatchMethod(MOVIE_TYPE, type, dispatch);
 };
 
 const getMovieRequest = async (type, pageNumber) => {

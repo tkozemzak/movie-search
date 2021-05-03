@@ -1,9 +1,10 @@
-import { MOVIE_LIST, RESPONSE_PAGE, LOAD_MORE_RESULTS } from '../types';
+import { MOVIE_LIST, MOVIE_TYPE, RESPONSE_PAGE, LOAD_MORE_RESULTS } from '../types';
 
 const initialState = {
   list: [],
   page: 1,
-  totalPages: 0
+  totalPages: 0,
+  movieType: 'Now Playing'
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -25,6 +26,12 @@ const movieReducer = (state = initialState, action) => {
         list: [...state.list, ...action.payload.list],
         page: action.payload.page,
         totalPages: action.payload.totalPages
+      };
+
+    case MOVIE_TYPE:
+      return {
+        ...state,
+        movieType: action.payload
       };
 
     default:
