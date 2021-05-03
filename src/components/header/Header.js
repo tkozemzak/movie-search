@@ -2,18 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import logo from '../../assets/cinema-logo.svg';
 import './Header.scss';
-import { getMovies } from '../../redux/actions/movies';
+import { getMovies, setMovieType, setResponsePageNumber } from '../../redux/actions/movies';
 import { PropTypes } from 'prop-types';
 import NAV_BUTTON_LIST from '../../assets/nav-button-list';
 
-const Header = ({ getMovies }) => {
+const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber }) => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+  const [type, setType] = useState('now_playing');
 
   useEffect(() => {
-    getMovies('now_playing', 1);
+    getMovies(type, page);
     // eslint-disable-next-line
-  }, []);
+  }, [type]);
+
+  //set nav section name and api req url on nav button click
+  const setMovieTypeUrl = (name, type) => {
+    setType(type);
+    setMovieType(name);
+  };
 
   //apply css classes according to screen width
   const toggleMenu = () => {
@@ -48,7 +55,7 @@ const Header = ({ getMovies }) => {
           <ul className={`${navClass ? 'header-nav header-mobile-nav' : 'header-nav'}`}>
             {NAV_BUTTON_LIST.map((data) => {
               return (
-                <li key={data.id} className="header-nav-item">
+                <li key={data.id} className="header-nav-item" onClick={() => setMovieTypeUrl(data.name, data.type)}>
                   <span className="header-list-name">
                     <i className={data.iconClass} />
                   </span>
@@ -66,11 +73,18 @@ const Header = ({ getMovies }) => {
 };
 
 Header.propTypes = {
-  getMovies: PropTypes.func
+  getMovies: PropTypes.func,
+  setMovieType: PropTypes.func,
+  setResponsePageNumber: PropTypes.func,
+  // list: PropTypes.array,
+  page: PropTypes.number,
+  totalPages: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
-  list: state.movies.list
+  list: state.movies.list,
+  page: state.movies.page,
+  totalPages: state.movies.totalPages
 });
 
-export default connect(mapStateToProps, { getMovies })(Header);
+export default connect(mapStateToProps, { getMovies, setMovieType, setResponsePageNumber })(Header);
