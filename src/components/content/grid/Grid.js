@@ -30,7 +30,7 @@ const Grid = ({ list }) => {
                   <div className="grid-detail-rating">
                     <Rating rating={image.vote_average} totalStars={5} />
                     &nbsp;&nbsp;
-                    <div className="grid-vote-average">{image.vote_average}</div>
+                    <div className="grid-vote-average">{(image.vote_average / 2).toFixed(1)}</div>
                   </div>
                 </div>
               </div>
