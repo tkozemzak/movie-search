@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../../services/movies.service';
 
-const MainContent = ({ list }) => {
+const MainContent = ({ list, movieType }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [images, setImages] = useState([]);
 
@@ -44,7 +44,7 @@ const MainContent = ({ list }) => {
     <div className="main-content">
       <Slideshow images={images} auto={true} showArrows={true} />
       <div className="grid-movie-title">
-        <div className="movieType">Now Playing</div>
+        <h3 className="movie-type">{movieType}</h3>
         <div className="paginate">
           <Paginate currentPage={currentPage} totalPages={10} paginate={paginate} />
         </div>
@@ -55,11 +55,13 @@ const MainContent = ({ list }) => {
 };
 
 MainContent.propTypes = {
-  list: PropTypes.array.isRequired
+  list: PropTypes.array.isRequired,
+  movieType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  list: state.movies.list
+  list: state.movies.list,
+  movieType: state.movies.movieType
 });
 
 export default connect(mapStateToProps, {})(MainContent);

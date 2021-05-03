@@ -13,6 +13,7 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
 
   useEffect(() => {
     getMovies(type, page);
+    setResponsePageNumber(page, totalPages);
     // eslint-disable-next-line
   }, [type]);
 
