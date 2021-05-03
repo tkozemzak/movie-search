@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { loadMoreMovies, setResponsePageNumber } from '../../redux/actions/movies';
 import './Main.scss';
 
-const Main = ({ loadMoreMovies, page, totalPages, setResponsePageNumber }) => {
+const Main = ({ loadMoreMovies, page, totalPages, setResponsePageNumber, movieType }) => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(page);
 
@@ -27,14 +27,13 @@ const Main = ({ loadMoreMovies, page, totalPages, setResponsePageNumber }) => {
     if (page < totalPages) {
       pageNumber += 1;
       setCurrentPage(pageNumber);
-      loadMoreMovies(pageNumber);
+      loadMoreMovies(movieType, pageNumber);
     }
   };
 
   //redux action for loadmoremovies
   useEffect(() => {
     setResponsePageNumber(currentPage, totalPages);
-    loadMoreMovies('now_playing', currentPage);
     //eslint-disable-next-line
   }, [currentPage, totalPages]);
 
@@ -59,13 +58,15 @@ Main.propTypes = {
   page: PropTypes.number,
   totalPages: PropTypes.number,
   loadMoreMovies: PropTypes.func,
-  setResponsePageNumber: PropTypes.func
+  setResponsePageNumber: PropTypes.func,
+  movieType: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
   list: state.movies.list,
   page: state.movies.page,
-  totalPages: state.movies.totalPages
+  totalPages: state.movies.totalPages,
+  movieType: state.movies.movieType
 });
 
 export default connect(mapStateToProps, { loadMoreMovies, setResponsePageNumber })(Main);

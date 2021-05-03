@@ -19,7 +19,6 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
     const response = await getMovieRequest(type, pageNumber);
     const { results, payload } = response;
     dispatchMethod(LOAD_MORE_RESULTS, { list: results, page: payload.page, totalPages: payload.totalPages }, dispatch);
-    dispatchMethod(RESPONSE_PAGE, payload, dispatch);
   } catch (error) {
     if (error.response) {
       dispatchMethod(SET_ERROR, error.response.data.message, dispatch);
