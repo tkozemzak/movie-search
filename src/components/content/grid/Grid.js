@@ -5,6 +5,7 @@ import './Grid.scss';
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../../services/movies.service';
+import LazyLoad from '../../lazy-load/LazyLoad';
 
 const Grid = ({ list }) => {
   const [movieData, setMovieData] = useState([]);
@@ -21,7 +22,7 @@ const Grid = ({ list }) => {
         {movieData.map((image, i) => {
           return (
             <div key={uuidv4()}>
-              <div className="grid-cell" style={{ backgroundImage: `url(${IMAGE_URL}${image.poster_path})` }}>
+              <LazyLoad className="grid-cell" src={`${IMAGE_URL}${image.poster_path}`} alt="placeholder">
                 <div className="grid-read-more">
                   <button className="grid-cell-button">More Info</button>
                 </div>
@@ -33,7 +34,7 @@ const Grid = ({ list }) => {
                     <div className="grid-vote-average">{(image.vote_average / 2).toFixed(1)}</div>
                   </div>
                 </div>
-              </div>
+              </LazyLoad>
             </div>
           );
         })}
