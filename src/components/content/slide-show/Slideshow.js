@@ -107,7 +107,6 @@ const Slideshow = ({ images, auto, showArrows }) => {
             >
               <div className="slider-title">
                 <h1>{slideShow.title}</h1>
-                <p>-</p>
                 <h5>{slideShow.release_date}</h5>
               </div>
             </div>
