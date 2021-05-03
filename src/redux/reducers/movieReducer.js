@@ -4,7 +4,7 @@ const initialState = {
   list: [],
   page: 1,
   totalPages: 0,
-  movieType: 'Now Playing'
+  movieType: 'now_playing'
 };
 
 const movieReducer = (state = initialState, action) => {

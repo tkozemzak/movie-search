@@ -14,6 +14,13 @@ const MainContent = ({ list, movieType }) => {
   //pull 4 random images from redux store list of movies
   const randomImages = list.sort(() => Math.random() - Math.random()).slice(0, 4);
 
+  const HEADER_TYPE = {
+    now_playing: 'Now Playing',
+    popular: 'Popular',
+    top_rated: 'Top Rated',
+    upcoming: 'Upcoming'
+  };
+
   useEffect(() => {
     //check for image data locally and in redux store
     if (list.length && randomImages.length) {
@@ -44,7 +51,7 @@ const MainContent = ({ list, movieType }) => {
     <div className="main-content">
       <Slideshow images={images} auto={true} showArrows={true} />
       <div className="grid-movie-title">
-        <h3 className="movie-type">{movieType}</h3>
+        <h3 className="movie-type">{HEADER_TYPE[movieType]}</h3>
         <div className="paginate">
           <Paginate currentPage={currentPage} totalPages={10} paginate={paginate} />
         </div>

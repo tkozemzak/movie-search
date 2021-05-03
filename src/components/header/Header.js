@@ -18,9 +18,9 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
   }, [type]);
 
   //set nav section name and api req url on nav button click
-  const setMovieTypeUrl = (name, type) => {
+  const setMovieTypeUrl = (type) => {
     setType(type);
-    setMovieType(name);
+    setMovieType(type);
   };
 
   //apply css classes according to screen width
@@ -56,7 +56,7 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
           <ul className={`${navClass ? 'header-nav header-mobile-nav' : 'header-nav'}`}>
             {NAV_BUTTON_LIST.map((data) => {
               return (
-                <li key={data.id} className="header-nav-item" onClick={() => setMovieTypeUrl(data.name, data.type)}>
+                <li key={data.id} className={data.type === type ? 'header-nav-item active-item' : 'header-nav-item'} onClick={() => setMovieTypeUrl(data.type)}>
                   <span className="header-list-name">
                     <i className={data.iconClass} />
                   </span>
