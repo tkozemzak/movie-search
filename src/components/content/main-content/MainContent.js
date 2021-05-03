@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../../services/movies.service';
 
-const MainContent = ({ list, movieType }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const MainContent = ({ list, movieType, totalPages, page }) => {
+  const [currentPage, setCurrentPage] = useState(page);
   const [images, setImages] = useState([]);
 
   //pull 4 random images from redux store list of movies
@@ -53,7 +53,7 @@ const MainContent = ({ list, movieType }) => {
       <div className="grid-movie-title">
         <h3 className="movie-type">{HEADER_TYPE[movieType]}</h3>
         <div className="paginate">
-          <Paginate currentPage={currentPage} totalPages={10} paginate={paginate} />
+          <Paginate currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
         </div>
       </div>
       <Grid />
@@ -63,12 +63,16 @@ const MainContent = ({ list, movieType }) => {
 
 MainContent.propTypes = {
   list: PropTypes.array.isRequired,
-  movieType: PropTypes.string.isRequired
+  movieType: PropTypes.string.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   list: state.movies.list,
-  movieType: state.movies.movieType
+  movieType: state.movies.movieType,
+  totalPages: state.movies.totalPages,
+  page: state.movies.page
 });
 
 export default connect(mapStateToProps, {})(MainContent);

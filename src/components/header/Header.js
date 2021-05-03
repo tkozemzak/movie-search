@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import logo from '../../assets/cinema-logo.svg';
 import './Header.scss';
 import { getMovies, setMovieType, setResponsePageNumber } from '../../redux/actions/movies';
 import { PropTypes } from 'prop-types';
@@ -40,7 +39,7 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
         <div className="header-bar"></div>
         <div className="header-navbar">
           <div className="header-image">
-            <img src={logo} alt="" />
+            <img src="" alt="" />
           </div>
           <div
             onClick={() => {
