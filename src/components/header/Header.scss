@@ -46,7 +46,9 @@
     list-style: none;
     padding-right: 15px;
   }
-
+  .header-nav-item:hover {
+    cursor: pointer;
+  }
   .active-item {
     color: #3498db;
   }
