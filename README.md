@@ -12,3 +12,5 @@ CURRENTLY NOT WORKING ON NODE V 15+. 14.6 lts works
 Todo:
 
 1. Filter movie list from api to avoid duplicates
+2. Allow toggle of auto search
+   A. Add Search button

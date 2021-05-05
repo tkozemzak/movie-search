@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Rating from '../rating/Rating';
 import { connect } from 'react-redux';
 import './SearchResults.scss';
@@ -14,7 +14,7 @@ const SearchResults = ({ searchResults, searchQuery }) => {
   //set movie data into local state with list from redux store
   //if list from redux changes, local state will update
   useEffect(() => {
-    setMovieData(list);
+    setMovieData(searchResults);
   }, [searchResults]);
 
   return (
@@ -25,21 +25,23 @@ const SearchResults = ({ searchResults, searchQuery }) => {
       <div className="grid">
         {movieData.map((image, i) => {
           return (
-            <div key={uuidv4()}>
-              <LazyLoad className="grid-cell" src={`${IMAGE_URL}${image.poster_path}`} alt="placeholder">
-                <div className="grid-read-more">
-                  <button className="grid-cell-button">More Info</button>
-                </div>
-                <div className="grid-detail">
-                  <span className="grid-detail-title">{image.title}</span>
-                  <div className="grid-detail-rating">
-                    <Rating rating={image.vote_average} totalStars={5} />
-                    &nbsp;&nbsp;
-                    <div className="grid-vote-average">{(image.vote_average / 2).toFixed(1)}</div>
+            <Fragment key={uuidv4()}>
+              {image.poster_path && (
+                <LazyLoad className="grid-cell" src={`${IMAGE_URL}${image.poster_path}`} alt="placeholder">
+                  <div className="grid-read-more">
+                    <button className="grid-cell-button">More Info</button>
                   </div>
-                </div>
-              </LazyLoad>
-            </div>
+                  <div className="grid-detail">
+                    <span className="grid-detail-title">{image.title}</span>
+                    <div className="grid-detail-rating">
+                      <Rating rating={image.vote_average} totalStars={5} />
+                      &nbsp;&nbsp;
+                      <div className="grid-vote-average">{(image.vote_average / 2).toFixed(1)}</div>
+                    </div>
+                  </div>
+                </LazyLoad>
+              )}
+            </Fragment>
           );
         })}
       </div>
@@ -48,8 +50,8 @@ const SearchResults = ({ searchResults, searchQuery }) => {
 };
 
 SearchResults.propTypes = {
-  searchResults: PropTypes.func.isRequired,
-  searchQuery: PropTypes.func.isRequired
+  searchResults: PropTypes.array.isRequired,
+  searchQuery: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Header.scss';
-import { getMovies, setMovieType, setResponsePageNumber } from '../../redux/actions/movies';
+import { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults } from '../../redux/actions/movies';
 import { PropTypes } from 'prop-types';
 import NAV_BUTTON_LIST from '../../assets/nav-button-list';
 
-const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber }) => {
+const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber, searchQuery, searchResults }) => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+  let [search, setSearch] = useState('');
   const [type, setType] = useState('now_playing');
 
   useEffect(() => {
@@ -31,6 +32,12 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
     setNavClass(navClass);
 
     navClass ? document.body.classList.add('header-nav-open') : document.body.classList.remove('header-nav-open');
+  };
+
+  const onSearchChange = (e) => {
+    setSearch(e.target.value);
+    searchQuery(e.target.value);
+    searchResults(e.target.value);
   };
 
   return (
@@ -64,7 +71,7 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
                 </li>
               );
             })}
-            <input className="search-input" type="text" placeholder="Search for a movie" />
+            <input onChange={onSearchChange} value={search} className="search-input" type="text" placeholder="Search for a movie" />
           </ul>
         </div>
       </div>
@@ -76,7 +83,8 @@ Header.propTypes = {
   getMovies: PropTypes.func,
   setMovieType: PropTypes.func,
   setResponsePageNumber: PropTypes.func,
-  // list: PropTypes.array,
+  searchQuery: PropTypes.func,
+  searchResults: PropTypes.func,
   page: PropTypes.number,
   totalPages: PropTypes.number
 };
@@ -87,4 +95,4 @@ const mapStateToProps = (state) => ({
   totalPages: state.movies.totalPages
 });
 
-export default connect(mapStateToProps, { getMovies, setMovieType, setResponsePageNumber })(Header);
+export default connect(mapStateToProps, { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults })(Header);
