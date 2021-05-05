@@ -39,12 +39,13 @@ const MainContent = ({ list, movieType, totalPages, page, getMovies, setResponse
     }
     //eslint-disable-next-line
   }, []);
-  //set current page in local state.
 
+  //update current page state when page or total pages changes - i.e. when a different nav button is selected
   useEffect(() => {
     setCurrentPage(page);
   }, [page, totalPages]);
 
+  //set current page in local state. pull updated movies from redux
   const paginate = (type) => {
     let pageNumber = currentPage;
     if (type === 'prev' && currentPage >= 1) {
