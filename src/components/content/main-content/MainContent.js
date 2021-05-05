@@ -6,8 +6,9 @@ import Grid from '../grid/Grid';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../../services/movies.service';
+import { setResponsePageNumber, getMovies } from '../../../redux/actions/movies';
 
-const MainContent = ({ list, movieType, totalPages, page }) => {
+const MainContent = ({ list, movieType, totalPages, page, getMovies, setResponsePageNumber }) => {
   const [currentPage, setCurrentPage] = useState(page);
   const [images, setImages] = useState([]);
 
@@ -39,12 +40,21 @@ const MainContent = ({ list, movieType, totalPages, page }) => {
     //eslint-disable-next-line
   }, []);
   //set current page in local state.
+
+  useEffect(() => {
+    setCurrentPage(page);
+  }, [page, totalPages]);
+
   const paginate = (type) => {
+    let pageNumber = currentPage;
     if (type === 'prev' && currentPage >= 1) {
-      setCurrentPage((prev) => prev - 1);
+      pageNumber -= 1;
     } else {
-      setCurrentPage((prev) => prev + 1);
+      pageNumber += 1;
     }
+    setCurrentPage(pageNumber);
+    setResponsePageNumber(pageNumber, totalPages);
+    getMovies(movieType, pageNumber);
   };
 
   return (
@@ -65,7 +75,9 @@ MainContent.propTypes = {
   list: PropTypes.array.isRequired,
   movieType: PropTypes.string.isRequired,
   totalPages: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired
+  page: PropTypes.number.isRequired,
+  getMovies: PropTypes.func,
+  setResponsePageNumber: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -75,4 +87,4 @@ const mapStateToProps = (state) => ({
   page: state.movies.page
 });
 
-export default connect(mapStateToProps, {})(MainContent);
+export default connect(mapStateToProps, { getMovies, setResponsePageNumber })(MainContent);
