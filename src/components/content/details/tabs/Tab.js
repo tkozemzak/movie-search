@@ -27,7 +27,7 @@ const Tab = ({ activeTab, label, onClick }) => {
 
 Tab.propTypes = {
   activeTab: PropTypes.string.isRequired,
-  label: PropTypes.sting.isRequired,
+  label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };
 

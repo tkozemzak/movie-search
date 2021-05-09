@@ -1,6 +1,7 @@
 import React from 'react';
 import Rating from '../rating/Rating';
 import './Details.scss';
+import Tabs from './tabs/Tabs';
 
 const tempImg = 'https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
@@ -30,6 +31,12 @@ const Details = () => {
                 &nbsp;
                 <span>6.5</span> <p>(200) reviews</p>
               </div>
+              <Tabs>
+                <div label="Overview">Overview component</div>
+                <div label="Crew">Crew component</div>
+                <div label="Media">Media component</div>
+                <div label="Reviews">Reviews component</div>
+              </Tabs>
             </div>
           </div>
         </div>
