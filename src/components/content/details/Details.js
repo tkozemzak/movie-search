@@ -1,6 +1,8 @@
 import React from 'react';
 import Rating from '../rating/Rating';
+import Crew from './crew/Crew';
 import './Details.scss';
+import Media from './media/Media';
 import Overview from './overview/Overview';
 import Tabs from './tabs/Tabs';
 
@@ -36,8 +38,12 @@ const Details = () => {
                 <div label="Overview">
                   <Overview />
                 </div>
-                <div label="Crew">Crew component</div>
-                <div label="Media">Media component</div>
+                <div label="Crew">
+                  <Crew />
+                </div>
+                <div label="Media">
+                  <Media />
+                </div>
                 <div label="Reviews">Reviews component</div>
               </Tabs>
             </div>
