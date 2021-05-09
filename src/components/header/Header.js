@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Header.scss';
 import { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults } from '../../redux/actions/movies';
 import { PropTypes } from 'prop-types';
 import NAV_BUTTON_LIST from '../../assets/nav-button-list';
+import logo from '../../assets/movie-logo.jpg';
 
 const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber, searchQuery, searchResults }) => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
   let [search, setSearch] = useState('');
   const [type, setType] = useState('now_playing');
+
+  const history = useHistory();
+
+  const navigateToMainPage = () => {
+    history.location.pathname !== '/' && history.push('/');
+  };
 
   useEffect(() => {
     getMovies(type, page);
@@ -45,8 +53,8 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
       <div className="header-nav-wrapper">
         <div className="header-bar"></div>
         <div className="header-navbar">
-          <div className="header-image">
-            <img src="" alt="" />
+          <div className="header-image" onClick={navigateToMainPage}>
+            <img src={logo} alt="" />
           </div>
           <div
             onClick={() => {
