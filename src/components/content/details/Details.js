@@ -1,10 +1,11 @@
 import React from 'react';
+import './Details.scss';
 import Rating from '../rating/Rating';
 import Crew from './crew/Crew';
-import './Details.scss';
 import Media from './media/Media';
 import Overview from './overview/Overview';
 import Tabs from './tabs/Tabs';
+import Reviews from './reviews/Reviews';
 
 const tempImg = 'https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
@@ -44,7 +45,9 @@ const Details = () => {
                 <div label="Media">
                   <Media />
                 </div>
-                <div label="Reviews">Reviews component</div>
+                <div label="Reviews">
+                  <Reviews />
+                </div>
               </Tabs>
             </div>
           </div>
