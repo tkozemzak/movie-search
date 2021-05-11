@@ -15,3 +15,4 @@ Todo:
 2. Allow toggle of auto search
    A. Add Search button
 3. Finish Details API integration
+4. Allow search from Details page
