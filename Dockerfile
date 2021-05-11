@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 #Install Dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt update && apt install -y --no-install-recommends apt-utils
 RUN npm install
 
 #Build production app
