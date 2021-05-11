@@ -7,6 +7,11 @@ Terraform config:
 5. terraform plan
 6. terraform apply -> yes
 
+Docker commands:
+
+1. docker pull kozemzak/movie-search:${TAG_NAME}
+2. docker run -it --rm -p 3001:3000 kozemzak/movie-search:${TAG_NAME}
+
 CURRENTLY NOT WORKING ON NODE V 15+. 14.6 lts works
 
 Todo:
@@ -18,3 +23,8 @@ Todo:
 4. Allow search from Details page
 5. Need to add REACT_APP_SENTRY_DSN to dockerfile after Sentry integration
 6. Add REACT_APP_SENTRY_DSN to config.yml (in docker build command) after Sentry integration
+
+ISSUES:
+
+1. Pagination is causing an issue with React Router
+   The above error occurred in the <Router.Consumer> component:
