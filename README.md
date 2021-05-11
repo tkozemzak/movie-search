@@ -16,3 +16,5 @@ Todo:
    A. Add Search button
 3. Finish Details API integration
 4. Allow search from Details page
+5. Need to add REACT_APP_SENTRY_DSN to dockerfile after Sentry integration
+6. Add REACT_APP_SENTRY_DSN to config.yml (in docker build command) after Sentry integration

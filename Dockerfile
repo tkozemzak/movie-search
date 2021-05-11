@@ -4,6 +4,10 @@ FROM node:lts-alpine
 #Use app as working dir
 WORKDIR /app
 
+ARG REACT_APP_API_SECRET
+
+ENV REACT_APP_API_SECRET=$REACT_APP_API_SECRET
+
 #Copy files from current dir to app
 COPY . /app
 
