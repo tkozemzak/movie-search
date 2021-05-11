@@ -133,6 +133,18 @@ jobs:
       - *restore-cache
       - run: docker login -u "${DOCKER_HUB_USER}" -p "${DOCKER_HUB_PASSWORD}"
       - run: docker build -t ${IMAGE_NAME}:latest .
+      - run:
+          name: Tag and push to Docker hub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]
+            then
+              docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:stable-${CIRCLE_BUILD_NUM} && docker push ${IMAGE_NAME}:stable-${CIRCLE_BUILD_NUM}
+            elif [ "${CIRCLE_BRANCH}" == "staging" ]
+            then
+              docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:staging-${CIRCLE_BUILD_NUM} && docker push ${IMAGE_NAME}:staging-${CIRCLE_BUILD_NUM}
+            else
+              docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:dev-${CIRCLE_BUILD_NUM} && docker push ${IMAGE_NAME}:dev-${CIRCLE_BUILD_NUM}
+            fi
 
   deploy-to-aws-s3:
     executor: app-executor
@@ -280,6 +292,17 @@ workflows:
       - unit-test:
           requires:
             - build
+            - terraform-validate
+            - terraform-plan-and-apply
+          filters:
+            branches:
+              only:
+                - dev
+                - staging
+                - master
+      - publish-to-docker-hub:
+          requires:
+            - unit-test
           filters:
             branches:
               only:
@@ -288,8 +311,7 @@ workflows:
                 - master
       - deploy-to-aws-s3:
           requires:
-            - unit-test
-            - terraform-plan-and-apply
+            - publish-to-docker-hub
           filters:
             branches:
               only:
