@@ -14,3 +14,4 @@ Todo:
 1. Filter movie list from api to avoid duplicates
 2. Allow toggle of auto search
    A. Add Search button
+3. Finish Details API integration
