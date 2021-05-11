@@ -110,6 +110,16 @@ jobs:
           paths:
             - artifacts
 
+  unit-test:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch-name
+      - *restore-cache
+      - run:
+          name: Run unit test
+          command: npm run test
+
   deploy-to-aws-s3:
     executor: app-executor
     steps:
@@ -253,9 +263,18 @@ workflows:
                 - dev
                 - staging
                 - master
+      - unit-test:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - dev
+                - staging
+                - master
       - deploy-to-aws-s3:
           requires:
-            - terraform-plan-and-apply
+            - unit-test
           filters:
             branches:
               only:

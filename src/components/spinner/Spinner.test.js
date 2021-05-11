@@ -9,4 +9,10 @@ describe('Spinner', () => {
     const element = getByTestId('spinner');
     expect(element).toBeInTheDocument();
   });
+
+  test('spinner contains 3 children', () => {
+    const { getByTestId } = render(<Spinner />);
+    const element = getByTestId('spinner');
+    expect(element.children.length).toBe(3);
+  });
 });
