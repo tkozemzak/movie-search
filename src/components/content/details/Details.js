@@ -16,6 +16,7 @@ const Details = ({ setShowSearch }) => {
     return () => {
       setShowSearch(true)
     }
+    //eslint-disable-next-line
   }, [])
 
   return (
