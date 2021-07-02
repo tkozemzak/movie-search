@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 import NAV_BUTTON_LIST from '../../assets/nav-button-list';
 import logo from '../../assets/movie-logo.jpg';
 
-const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber, searchQuery, searchResults }) => {
+const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber, searchQuery, searchResults, showSearch }) => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
   let [search, setSearch] = useState('');
@@ -79,7 +79,15 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
                 </li>
               );
             })}
-            <input onChange={onSearchChange} value={search} className="search-input" type="text" placeholder="Search for a movie" />
+            {
+              showSearch ?
+                <input onChange={onSearchChange} value={search} className="search-input" type="text" placeholder="Search for a movie" />
+              :
+                null
+            }
+            
+           
+            
           </ul>
         </div>
       </div>

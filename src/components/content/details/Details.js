@@ -1,5 +1,5 @@
-import React from 'react';
 import './Details.scss';
+import { useEffect } from 'react'
 import Rating from '../rating/Rating';
 import Crew from './crew/Crew';
 import Media from './media/Media';
@@ -9,7 +9,15 @@ import Reviews from './reviews/Reviews';
 
 const tempImg = 'https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
-const Details = () => {
+const Details = ({ setShowSearch }) => {
+
+  useEffect(() => {
+    setShowSearch(false)
+    return () => {
+      setShowSearch(true)
+    }
+  }, [])
+
   return (
     <>
       <div className="movie-container">
