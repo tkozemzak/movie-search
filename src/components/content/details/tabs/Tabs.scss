@@ -1,6 +1,9 @@
 .tabs {
   text-align: left;
 }
+.tabs:hover {
+  cursor: pointer;
+}
 
 .tab-list {
   padding-left: 0;
