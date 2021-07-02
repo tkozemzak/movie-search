@@ -7,7 +7,7 @@ const API_KEY = process.env.REACT_APP_API_SECRET;
 export const MOVIE_API_URL = async (type, page) => {
   const response = await axios.get(`${REQUEST_URL}/movie/${type}?api_key=${API_KEY}&language=en-US&page=${page}`);
 
-  return response;
+  return response
 };
 
 export const SEARCH_API_URL = async (query) => {

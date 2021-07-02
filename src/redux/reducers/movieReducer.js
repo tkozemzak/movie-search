@@ -23,7 +23,7 @@ const movieReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages
       };
     case LOAD_MORE_RESULTS:
-      console.log('action in LOAD_MORE_RESULTS: ', action);
+      console.log('action.payload.list', action.payload.list)
       return {
         ...state,
         list: [...state.list, ...action.payload.list],

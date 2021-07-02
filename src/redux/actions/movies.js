@@ -5,10 +5,12 @@ export const getMovies = (type, pageNumber) => async (dispatch) => {
   try {
     const response = await getMovieRequest(type, pageNumber);
     const { results, payload } = response;
+    console.log('response', response)
     dispatchMethod(MOVIE_LIST, results, dispatch);
     dispatchMethod(RESPONSE_PAGE, payload, dispatch);
   } catch (error) {
     if (error.response) {
+      console.log('error', error)
       dispatchMethod(SET_ERROR, error.response.data.message, dispatch);
     }
   }
@@ -43,7 +45,10 @@ export const searchResults = (query) => async (dispatch) => {
   try {
     if (query) {
       const movies = await SEARCH_API_URL(query);
-      const { results } = movies.data;
+      let { results } = movies.data;
+      results = results.filter((item)=> {
+        return !item.title.includes('%')
+      })
       dispatchMethod(SEARCH_RESULTS, results, dispatch);
     } else {
       dispatchMethod(SEARCH_RESULTS, [], dispatch);
@@ -57,11 +62,19 @@ export const searchResults = (query) => async (dispatch) => {
 
 const getMovieRequest = async (type, pageNumber) => {
   const movies = await MOVIE_API_URL(type, pageNumber);
-  const { results, page, total_pages } = movies.data;
+
+  let { results, page, total_pages } = movies.data;
+
+  results = results.filter((item)=> {
+    return !item.title.includes('%')
+  })
+
   const payload = {
     page,
     totalPages: total_pages
   };
+  
+  console.log('results after filter', results)
   return { results, payload };
 };
 
