@@ -23,5 +23,5 @@ Todo:
 
 ISSUES:
 
-1. Pagination is causing an issue with React Router
+1. FIXED - Pagination is causing an issue with React Router
    The above error occurred in the <Router.Consumer> component:
