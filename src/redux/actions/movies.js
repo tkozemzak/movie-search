@@ -1,4 +1,4 @@
-import { MOVIE_LIST, MOVIE_TYPE, SET_ERROR, RESPONSE_PAGE, LOAD_MORE_RESULTS, SEARCH_RESULTS, SEARCH_QUERY, MOVIE_DETAILS } from '../types';
+import { MOVIE_LIST, MOVIE_TYPE, SET_ERROR, RESPONSE_PAGE, LOAD_MORE_RESULTS, SEARCH_RESULTS, SEARCH_QUERY, MOVIE_DETAILS, CLEAR_MOVIE_DETAILS } from '../types';
 import { MOVIE_API_URL, SEARCH_API_URL, MOVIE_DETAILS_URL, MOVIE_CREDITS_URL, MOVIE_IMAGES_URL, MOVIE_VIDEOS_URL, MOVIE_REVIEWS_URL } from '../../services/movies.service';
 
 export const getMovies = (type, pageNumber) => async (dispatch) => {
@@ -77,6 +77,10 @@ export const movieDetails = (movie_id) => async (dispatch) => {
     }
   }
 };
+
+export const clearMovieDetails = () => async (dispatch) => {
+  dispatchMethod(CLEAR_MOVIE_DETAILS, [], dispatch)
+}
 
 const getMovieRequest = async (type, pageNumber) => {
   const movies = await MOVIE_API_URL(type, pageNumber);

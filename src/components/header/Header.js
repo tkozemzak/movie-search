@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Header.scss';
-import { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults } from '../../redux/actions/movies';
+import { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults, clearMovieDetails } from '../../redux/actions/movies';
 import { PropTypes } from 'prop-types';
 import NAV_BUTTON_LIST from '../../assets/nav-button-list';
 import logo from '../../assets/movie-logo.jpg';
 
-const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber, searchQuery, searchResults, showSearch }) => {
+const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumber, searchQuery, searchResults, showSearch, clearMovieDetails }) => {
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
   let [search, setSearch] = useState('');
@@ -16,6 +16,7 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
   const history = useHistory();
 
   const navigateToMainPage = () => {
+    clearMovieDetails()
     history.location.pathname !== '/' && history.push('/');
   };
 
@@ -96,6 +97,7 @@ const Header = ({ getMovies, setMovieType, page, totalPages, setResponsePageNumb
 };
 
 Header.propTypes = {
+  clearMovieDetails: PropTypes.func,
   getMovies: PropTypes.func,
   setMovieType: PropTypes.func,
   setResponsePageNumber: PropTypes.func,
@@ -111,4 +113,4 @@ const mapStateToProps = (state) => ({
   totalPages: state.movies.totalPages
 });
 
-export default connect(mapStateToProps, { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults })(Header);
+export default connect(mapStateToProps, { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResults, clearMovieDetails })(Header);

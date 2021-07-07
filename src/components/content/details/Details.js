@@ -10,10 +10,15 @@ import Overview from './overview/Overview';
 import Tabs from './tabs/Tabs';
 import Reviews from './reviews/Reviews';
 import { movieDetails } from '../../../redux/actions/movies';
+import { IMAGE_URL } from '../../../services/movies.service'
 
 const tempImg = 'https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
 const Details = ({ setShowSearch, movieDetails, movie_details }) => {
+  const [details, setDetails] = useState();
+
+
+
   useEffect(() => {
     setShowSearch(false);
     return () => {
@@ -25,25 +30,30 @@ const Details = ({ setShowSearch, movieDetails, movie_details }) => {
   const { id } = useParams()
 
   useEffect(() => {
-    if (movie_details === undefined) {
-      const response = movieDetails(id)
+    if (movie_details.length === 0) {
+      movieDetails(id)
     }
+    setDetails(movie_details[0])
+
     
   }, [id, movie_details])
 
   return (
     <>
+    {
+      details && 
+    
       <div className="movie-container">
-        <div className="movie-bg" style={{ backgroundImage: `url(${tempImg}})` }}></div>
+        <div className="movie-bg" style={{ backgroundImage: `url(${IMAGE_URL}${details.backdrop_path})` }}></div>
         <div className="movie-overlay"></div>
         <div className="movie-details">
           <div className="movie-image">
-            <img src={`${tempImg}`} alt="" />
+            <img src={`${IMAGE_URL}${details.backdrop_path}`} alt="" />
           </div>
           <div className="movie-body">
             <div className="movie-overview">
               <div className="title">
-                Title <span>Release Date</span>
+                {details.title} <span>{details.release_date}</span>
               </div>
               <div className="movie-genres">
                 <ul className="genres">
@@ -74,6 +84,7 @@ const Details = ({ setShowSearch, movieDetails, movie_details }) => {
           </div>
         </div>
       </div>
+}
     </>
   );
 };
@@ -88,6 +99,6 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(
-null,
+mapStateToProps,
 { movieDetails }
 )(Details);
