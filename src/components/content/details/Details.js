@@ -1,23 +1,35 @@
 import './Details.scss';
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types'
 import Rating from '../rating/Rating';
 import Crew from './crew/Crew';
 import Media from './media/Media';
 import Overview from './overview/Overview';
 import Tabs from './tabs/Tabs';
 import Reviews from './reviews/Reviews';
+import { movieDetails } from '../../../redux/actions/movies';
 
 const tempImg = 'https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
-const Details = ({ setShowSearch }) => {
+const Details = ({ setShowSearch, movieDetails, movie_details }) => {
+  useEffect(() => {
+    setShowSearch(false);
+    return () => {
+      setShowSearch(true);
+    };
+    //eslint-disable-next-line
+  }, []);
+
+  const { id } = useParams()
 
   useEffect(() => {
-    setShowSearch(false)
-    return () => {
-      setShowSearch(true)
+    if (movie_details === undefined) {
+      const response = movieDetails(id)
     }
-    //eslint-disable-next-line
-  }, [])
+    
+  }, [id, movie_details])
 
   return (
     <>
@@ -66,4 +78,16 @@ const Details = ({ setShowSearch }) => {
   );
 };
 
-export default Details;
+Details.propTypes = {
+  movie_details: PropTypes.array,
+  movieDetails: PropTypes.func
+}
+
+const mapStateToProps = (state) => ({
+  movie_details: state.movies.movie_details
+})
+
+export default connect(
+null,
+{ movieDetails }
+)(Details);
