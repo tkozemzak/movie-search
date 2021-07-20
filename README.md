@@ -12,7 +12,7 @@ Docker commands:
 1. docker pull kozemzak/movie-search:${TAG_NAME}
 2. docker run -it --rm -p 3001:3000 kozemzak/movie-search:${TAG_NAME}
 
-CURRENTLY NOT WORKING ON NODE V 15+. 14.6 lts works
+CURRENTLY NOT WORKING ON NODE V 15+. 14.16.1 works
 
 Todo:
 
